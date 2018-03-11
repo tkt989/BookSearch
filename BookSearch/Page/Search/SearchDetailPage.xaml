@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="BookSearch.Page.Search.SearchDetailPage">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="#EEEEEE" Spacing="10">
+            <StackLayout BackgroundColor="White">
+                <Label Text="{Binding LibraryName}" Margin="10,10,10,10" FontAttributes="Bold" />
+                <Label Text="{Binding Address}" HorizontalOptions="End" />
+                <Label Text="予約ページへ" TextColor="#0044cc">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ReserveURLTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

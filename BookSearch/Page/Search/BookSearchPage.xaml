@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:BookSearch.View"
+    x:Class="BookSearch.Page.Search.BookSearchPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <RelativeLayout HeightRequest="150" HorizontalOptions="FillAndExpand" VerticalOptions="Start" BackgroundColor="Red">
+                <Image WidthRequest="120" HeightRequest="120" BackgroundColor="Fuchsia"
+                    x:Name="Thumbnail"
+                    RelativeLayout.XConstraint="{ConstraintExpression
+                    Type=RelativeToParent,
+                    Property=X,
+                    Factor=0,
+                    Constant=10}"
+                    RelativeLayout.YConstraint="{ConstraintExpression
+                    Type=RelativeToParent,
+                    Property=Height,
+                    Factor=0.5,
+                    Constant=-60}"></Image>
+
+                <Label BackgroundColor="Yellow"
+                    x:Name="BookTitle"
+                    Text="HelloWorld"
+                    FontSize="24"
+                    VerticalTextAlignment="Center"
+                    RelativeLayout.HeightConstraint="{ConstraintExpression
+                    Type=RelativeToParent,
+                    Property=Height,
+                    Factor=1.0,
+                    Constant=0}"
+                    RelativeLayout.WidthConstraint="{ConstraintExpression
+                    Type=RelativeToParent,
+                    Property=Width,
+                    Factor=1.0,
+                    Constant=-170}"
+                    RelativeLayout.XConstraint="{ConstraintExpression
+                    Type=RelativeToView,
+                    ElementName=Thumbnail,
+                    Property=X,
+                    Factor=0,
+                    Constant=150}">
+                </Label>
+            </RelativeLayout>
+
+            <ListView x:Name="listView" ItemTapped="ItemTapped" BackgroundColor="Aqua" RowHeight="70">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Vertical" Padding="5">
+                                <Label Text="{Binding LibraryName}" Style="{DynamicResource TitleStyle}" />
+                                <Label Text="{Binding Status}" TextColor="{Binding StatusColor}" Margin="5" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
