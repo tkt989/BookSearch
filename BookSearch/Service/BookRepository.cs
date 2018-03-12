@@ -18,14 +18,18 @@ namespace BookSearch.Service
 
         public async Task SearchInFavorites(string isbn, Action<List<SearchResult>> callback)
         {
-            var favorites = LibraryEntity.GetAll().ToList();
-            var systemIdList = favorites.Select(library => library.SystemId).Distinct().ToList();
+            await Search(isbn, LibraryEntity.GetAll().ToList(), callback);
+        }
+
+        public async Task Search(string isbn, List<LibraryEntity> libraries, Action<List<SearchResult>> callback)
+        {
+            var systemIdList = libraries.Select(library => library.SystemId).Distinct().ToList();
 
             await calilApi.Search(isbn, systemIdList, response =>
             {
                 var result = new List<SearchResult>();
 
-                foreach (var library in favorites)
+                foreach (var library in libraries)
                 {
                     var match = response.Where(r => r.SystemId == library.SystemId).FirstOrDefault();
                     if (match != null)
@@ -36,6 +40,12 @@ namespace BookSearch.Service
 
                 callback?.Invoke(result);
             });
+        }
+
+        public async Task SearchInLocation(string isbn, double longitude, double latitude, Action<List<SearchResult>> callback)
+        {
+            var nearbyLibraries = await calilApi.GetLibraryAsync(longitude, latitude);
+            await Search(isbn, nearbyLibraries, callback);
         }
     }
 }

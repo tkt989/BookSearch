@@ -94,6 +94,8 @@
       <DependentUpon>SearchDetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\BookInfo.cs" />
+    <Compile Include="Model\GroupedSearchResultList.cs" />
+    <Compile Include="Model\GroupedSearchResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

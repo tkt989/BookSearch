@@ -44,13 +44,18 @@
                 </Label>
             </RelativeLayout>
 
-            <ListView x:Name="listView" ItemTapped="ItemTapped" BackgroundColor="Aqua" RowHeight="70">
+            <ListView x:Name="listView" ItemTapped="ItemTapped" IsGroupingEnabled="true" GroupDisplayBinding="{Binding Title}" BackgroundColor="Aqua" HasUnevenRows="true" RowHeight="30">
+                <ListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Title}"/>
+                    </DataTemplate>
+                </ListView.GroupHeaderTemplate>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
+                        <ViewCell Height="70">
                             <StackLayout Orientation="Vertical" Padding="5">
                                 <Label Text="{Binding LibraryName}" Style="{DynamicResource TitleStyle}" />
-                                <Label Text="{Binding Status}" TextColor="{Binding StatusColor}" Margin="5" />
+                                <Label Text="{Binding Status}" TextColor="{Binding StatusColor}" HorizontalOptions="End" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

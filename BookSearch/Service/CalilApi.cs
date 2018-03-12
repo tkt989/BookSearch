@@ -37,13 +37,19 @@ namespace BookSearch.Service
             return result;
         }
 
+        /// <summary>
+        /// 現在位置から図書館を検索
+        /// </summary>
+        /// <returns>The library async.</returns>
+        /// <param name="longitude">Longitude.</param>
+        /// <param name="latitude">Latitude.</param>
         public async Task<List<LibraryEntity>> GetLibraryAsync(double longitude, double latitude)
         {
-            var url = baseUrl + $"library?format=json&callback=&geocode={longitude},{latitude}";
+            var url = baseUrl + $"library?format=json&callback=&limit=10&geocode={longitude},{latitude}";
 
             var content = await client.GetStringAsync(url);
             var result = JsonConvert.DeserializeObject<List<LibraryEntity>>(content);
-            return result;
+            return result.OrderBy(library => library.Distance).ToList();
         }
 
         /// <summary>

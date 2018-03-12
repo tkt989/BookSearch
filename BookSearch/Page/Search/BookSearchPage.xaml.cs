@@ -13,6 +13,7 @@ namespace BookSearch.Page.Search
     public partial class BookSearchPage : ContentPage
     {
         private string isbn;
+        GroupedSearchResultList list = new GroupedSearchResultList();
         BookRepository bookRepository;
 
         public BookSearchPage()
@@ -24,11 +25,25 @@ namespace BookSearch.Page.Search
         {
             bookRepository = new BookRepository();
             this.isbn = isbn;
+
+            listView.HasUnevenRows = true;
+            listView.ItemsSource = list;
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
+
+            Task.Run(() =>
+            {
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    await bookRepository.SearchInLocation(isbn, 129.8590067, 32.7906449, list =>
+                    {
+                        this.list.Nearby = list;
+                    });
+                });
+            });
             
             Task.Run(() =>
             {
@@ -36,7 +51,7 @@ namespace BookSearch.Page.Search
                     {
                         await bookRepository.SearchInFavorites(isbn, list =>
                         {
-                            listView.ItemsSource = list;
+                            this.list.Favorites = list;
                         });
                     });
             });
