@@ -55,7 +55,7 @@ namespace BookSearch.Page.Search
                         });
                     });
             });
-            
+
             Task.Run(async () =>
             {
                 var info = await bookRepository.SearchBookInfo(isbn);

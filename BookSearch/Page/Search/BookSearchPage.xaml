@@ -5,55 +5,31 @@
     xmlns:controls="clr-namespace:BookSearch.View"
     x:Class="BookSearch.Page.Search.BookSearchPage">
     <ContentPage.Content>
-        <StackLayout>
-            <RelativeLayout HeightRequest="150" HorizontalOptions="FillAndExpand" VerticalOptions="Start" BackgroundColor="Red">
-                <Image WidthRequest="120" HeightRequest="120" BackgroundColor="Fuchsia"
-                    x:Name="Thumbnail"
-                    RelativeLayout.XConstraint="{ConstraintExpression
-                    Type=RelativeToParent,
-                    Property=X,
-                    Factor=0,
-                    Constant=10}"
-                    RelativeLayout.YConstraint="{ConstraintExpression
-                    Type=RelativeToParent,
-                    Property=Height,
-                    Factor=0.5,
-                    Constant=-60}"></Image>
+        <StackLayout Orientation="Vertical">
+            <Frame Padding="0" CornerRadius="0">
+            <StackLayout Orientation="Horizontal" HeightRequest="88" HorizontalOptions="FillAndExpand">
+                <Image x:Name="Thumbnail" HeightRequest="64" VerticalOptions="Center" Margin="16,0,16,0"/>
 
-                <Label BackgroundColor="Yellow"
-                    x:Name="BookTitle"
-                    Text="HelloWorld"
-                    FontSize="24"
-                    VerticalTextAlignment="Center"
-                    RelativeLayout.HeightConstraint="{ConstraintExpression
-                    Type=RelativeToParent,
-                    Property=Height,
-                    Factor=1.0,
-                    Constant=0}"
-                    RelativeLayout.WidthConstraint="{ConstraintExpression
-                    Type=RelativeToParent,
-                    Property=Width,
-                    Factor=1.0,
-                    Constant=-170}"
-                    RelativeLayout.XConstraint="{ConstraintExpression
-                    Type=RelativeToView,
-                    ElementName=Thumbnail,
-                    Property=X,
-                    Factor=0,
-                    Constant=150}">
-                </Label>
-            </RelativeLayout>
+                <Label x:Name="BookTitle" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+            </StackLayout>
+            </Frame>
 
-            <ListView x:Name="listView" ItemTapped="ItemTapped" IsGroupingEnabled="true" GroupDisplayBinding="{Binding Title}" BackgroundColor="Aqua" HasUnevenRows="true" RowHeight="30">
+            <ListView x:Name="listView" ItemTapped="ItemTapped" IsGroupingEnabled="true" GroupDisplayBinding="{Binding Title}" HasUnevenRows="true" RowHeight="30">
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding Title}"/>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" Margin="16,0,0,0">
+                                <Image Source="{Binding Icon}" HeightRequest="20" VerticalOptions="CenterAndExpand"/>
+                                <Label Text="{Binding Title}" VerticalOptions="CenterAndExpand"/>
+                            </StackLayout>
+                        </ViewCell>
                     </DataTemplate>
                 </ListView.GroupHeaderTemplate>
+
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell Height="70">
-                            <StackLayout Orientation="Vertical" Padding="5">
+                            <StackLayout Orientation="Vertical" Margin="16,16,16,16">
                                 <Label Text="{Binding LibraryName}" Style="{DynamicResource TitleStyle}" />
                                 <Label Text="{Binding Status}" TextColor="{Binding StatusColor}" HorizontalOptions="End" />
                             </StackLayout>

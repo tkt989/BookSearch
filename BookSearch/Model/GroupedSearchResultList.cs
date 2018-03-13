@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Xamarin.Forms;
 
 namespace BookSearch.Model
 {
@@ -34,8 +35,8 @@ namespace BookSearch.Model
         
         public GroupedSearchResultList()
         {
-            favorites = new GroupedSearchResult("お気に入り");
-            nearby = new GroupedSearchResult("近く");
+            favorites = new GroupedSearchResult("お気に入り", ImageSource.FromResource("BookSearch.Resources.star.png"));
+            nearby = new GroupedSearchResult("近く", ImageSource.FromResource("BookSearch.Resources.location.png"));
 
             Add(favorites);
             Add(nearby);

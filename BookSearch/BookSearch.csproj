@@ -57,6 +57,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\location.png" />
+    <EmbeddedResource Include="Resources\star.png" />
+    <EmbeddedResource Include="Resources\map.png" />
+    <EmbeddedResource Include="Resources\list.png" />
+    <EmbeddedResource Include="Resources\book.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -142,6 +147,7 @@
     <Folder Include="Page\Favorite\" />
     <Folder Include="Page\Search\" />
     <Folder Include="Service\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.5.0.121934\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.5.0.121934\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets')" />

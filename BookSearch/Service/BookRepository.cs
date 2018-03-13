@@ -23,6 +23,8 @@ namespace BookSearch.Service
 
         public async Task Search(string isbn, List<LibraryEntity> libraries, Action<List<SearchResult>> callback)
         {
+            callback?.Invoke(libraries.Select(library => SearchResult.FromEntity(library)).ToList());
+
             var systemIdList = libraries.Select(library => library.SystemId).Distinct().ToList();
 
             await calilApi.Search(isbn, systemIdList, response =>

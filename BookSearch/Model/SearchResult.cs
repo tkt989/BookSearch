@@ -53,6 +53,20 @@ namespace BookSearch.Model
             };
         }
 
+        public static SearchResult FromEntity(LibraryEntity entity)
+        {
+            return new SearchResult()
+            {
+                LibId = entity.LibId,
+                LibKey = entity.LibKey,
+                SystemName = entity.SystemName,
+                ReserveURL = null,
+                Name = entity.Name,
+                BookStatus = BookStatus.LOADING,
+                Address = entity.Address
+            };
+        }
+
         #region ViewMode
 
         public string LibraryName
