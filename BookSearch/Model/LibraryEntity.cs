@@ -37,6 +37,9 @@ namespace BookSearch.Model
         [JsonProperty("distance")]
         public double Distance { get; set; }
 
+        [JsonProperty("url_pc")]
+        public string URL { get; set; }
+
         public bool IsFavorite { get; set; }
 
         public static void Init(Realm realm)

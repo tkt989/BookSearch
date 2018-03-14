@@ -24,9 +24,10 @@ namespace BookSearch.Model
         public string ReserveURL = "";
         public string Name = "";
         public string Address { get; set; } = "";
+        public string URL { get; set; } = "";
 
         public BookStatus BookStatus;
-        public Dictionary<string, BookStatus> LendingList = new Dictionary<string, BookStatus>();
+        public Dictionary<string, string> LendingList = new Dictionary<string, string>();
 
         public static SearchResult FromEntity(LibraryEntity entity, SearchResponse response)
         {
@@ -45,11 +46,13 @@ namespace BookSearch.Model
             {
                 LibId = entity.LibId,
                 LibKey = entity.LibKey,
+                LendingList = response.LibKeyMap,
                 SystemName = entity.SystemName,
                 ReserveURL = response.ReserveUrl,
                 Name = entity.Name,
                 BookStatus = status,
                 Address = entity.Address,
+                URL = entity.URL,
             };
         }
 
@@ -63,7 +66,8 @@ namespace BookSearch.Model
                 ReserveURL = null,
                 Name = entity.Name,
                 BookStatus = BookStatus.LOADING,
-                Address = entity.Address
+                Address = entity.Address,
+                URL = entity.URL,
             };
         }
 

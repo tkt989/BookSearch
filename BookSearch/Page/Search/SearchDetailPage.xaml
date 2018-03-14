@@ -1,16 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="BookSearch.Page.Search.SearchDetailPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:BookSearch;assembly=BookSearch" x:Class="BookSearch.Page.Search.SearchDetailPage">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="#EEEEEE" Spacing="10">
-            <StackLayout BackgroundColor="White">
-                <Label Text="{Binding LibraryName}" Margin="10,10,10,10" FontAttributes="Bold" />
-                <Label Text="{Binding Address}" HorizontalOptions="End" />
-                <Label Text="予約ページへ" TextColor="#0044cc">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="ReserveURLTapped" />
-                    </Label.GestureRecognizers>
-                </Label>
+        <ScrollView>
+            <StackLayout Orientation="Vertical" Margin="16,16,16,16" Spacing="8">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{Binding LibraryName}" FontSize="32" FontAttributes="Bold" VerticalOptions="Center" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="{local:ImageResource BookSearch.Resources.map.png}" HeightRequest="24" />
+                    <Label Text="{Binding Address}" TextColor="#0044cc" VerticalOptions="Center" />
+                </StackLayout>
+                <BoxView HorizontalOptions="Fill" HeightRequest="1" Color="#bfbfbf" />
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="{local:ImageResource BookSearch.Resources.earth.png}" HeightRequest="24" />
+                    <Label Text="{Binding URL}" TextColor="#0044cc" VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="URLTapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <BoxView HorizontalOptions="Fill" HeightRequest="1" Color="#bfbfbf" />
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="{local:ImageResource BookSearch.Resources.list.png}" VerticalOptions="Start" HeightRequest="24" />
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Margin="0,3,0,0">
+                        <Label Text="蔵書" FontSize="16" FontAttributes="Bold" />
+                        <Grid HorizontalOptions="FillAndExpand" x:Name="grid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </StackLayout>
+                </StackLayout>
+                <BoxView HorizontalOptions="Fill" HeightRequest="1" Color="#bfbfbf" />
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="{local:ImageResource BookSearch.Resources.map.png}" HeightRequest="24" />
+                    <Label Text="予約ページへ" TextColor="#0044cc" VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ReserveURLTapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
             </StackLayout>
-        </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
