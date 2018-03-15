@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using BookSearch.Model;
+using Plugin.ExternalMaps;
 
 using Xamarin.Forms;
 
@@ -42,6 +43,14 @@ namespace BookSearch.Page.Search
                 grid.Children.Add(status, 1, index);
                 index++;
             }
+        }
+
+        public async void AddressTapped(object sender, EventArgs e)
+        {
+            var loc = result.Geocode.Split(new char[] { ',' });
+            var longitude = double.Parse(loc[0]);
+            var latitude = double.Parse(loc[1]);
+            var success = await CrossExternalMaps.Current.NavigateTo(result.Name, latitude, longitude);
         }
 
         public void URLTapped(object sender, EventArgs e)

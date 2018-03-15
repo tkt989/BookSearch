@@ -18,6 +18,16 @@ namespace BookSearch.Page
             favorites.SubscribeForNotifications((sender, changes, error) =>
             {
                 listView.ItemsSource = sender.Select(library => library.Name);
+
+                if (favorites.Count() == 0)
+                {
+                    listView.IsVisible = false;
+                    message.IsVisible = true;
+                    return;
+                }
+
+                listView.IsVisible = true;
+                message.IsVisible = false;
             });
 
             listView.ItemTapped += async (sender, e) => {

@@ -40,6 +40,9 @@ namespace BookSearch.Model
         [JsonProperty("url_pc")]
         public string URL { get; set; }
 
+        [JsonProperty("geocode")]
+        public string Geocode { get; set; }
+
         public bool IsFavorite { get; set; }
 
         public static void Init(Realm realm)

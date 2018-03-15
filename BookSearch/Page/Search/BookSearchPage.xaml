@@ -1,31 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:controls="clr-namespace:BookSearch.View"
-    x:Class="BookSearch.Page.Search.BookSearchPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:BookSearch.View" x:Class="BookSearch.Page.Search.BookSearchPage">
     <ContentPage.Content>
         <StackLayout Orientation="Vertical">
             <Frame Padding="0" CornerRadius="0">
-            <StackLayout Orientation="Horizontal" HeightRequest="88" HorizontalOptions="FillAndExpand">
-                <Image x:Name="Thumbnail" HeightRequest="64" VerticalOptions="Center" Margin="16,0,16,0"/>
-
-                <Label x:Name="BookTitle" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
-            </StackLayout>
+                <StackLayout Orientation="Horizontal" HeightRequest="88" HorizontalOptions="FillAndExpand">
+                    <Image x:Name="Thumbnail" HeightRequest="64" VerticalOptions="Center" Margin="16,0,16,0" />
+                    <Label x:Name="Title" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Grid.Row="0" />
+                </StackLayout>
             </Frame>
-
             <ListView x:Name="listView" ItemTapped="ItemTapped" IsGroupingEnabled="true" GroupDisplayBinding="{Binding Title}" HasUnevenRows="true" RowHeight="30">
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" Margin="16,0,0,0">
-                                <Image Source="{Binding Icon}" HeightRequest="20" VerticalOptions="CenterAndExpand"/>
-                                <Label Text="{Binding Title}" VerticalOptions="CenterAndExpand"/>
+                                <Image Source="{Binding Icon}" HeightRequest="20" VerticalOptions="CenterAndExpand" />
+                                <Label Text="{Binding Title}" VerticalOptions="CenterAndExpand" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.GroupHeaderTemplate>
-
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell Height="70">

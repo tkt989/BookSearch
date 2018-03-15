@@ -25,6 +25,7 @@ namespace BookSearch.Model
         public string Name = "";
         public string Address { get; set; } = "";
         public string URL { get; set; } = "";
+        public string Geocode { get; set; }
 
         public BookStatus BookStatus;
         public Dictionary<string, string> LendingList = new Dictionary<string, string>();
@@ -53,6 +54,7 @@ namespace BookSearch.Model
                 BookStatus = status,
                 Address = entity.Address,
                 URL = entity.URL,
+                Geocode = entity.Geocode,
             };
         }
 
@@ -68,6 +70,7 @@ namespace BookSearch.Model
                 BookStatus = BookStatus.LOADING,
                 Address = entity.Address,
                 URL = entity.URL,
+                Geocode = entity.Geocode,
             };
         }
 

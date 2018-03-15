@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="BookSearch.Page.FavoritePage">
     <ContentPage.Content>
-        <ListView x:Name="listView"></ListView>
+        <StackLayout Orientation="Vertical">
+            <ListView x:Name="listView"></ListView>
+            <Label x:Name="message" Text="お気に入りの図書館が登録されていません" IsVisible="false" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" TextColor="#bfbfbf"/>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

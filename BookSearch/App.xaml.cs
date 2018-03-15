@@ -11,7 +11,9 @@ namespace BookSearch
 
             if (Application.Current != null)
             {
-                Model.LibraryEntity.Init(Realm.GetInstance());
+                var realm = Realm.GetInstance();
+                Model.BookInfo.Realm = realm;
+                Model.LibraryEntity.Init(realm);
             }
             MainPage = new NavigationPage(new Page.MainPage());
             //MainPage = new NavigationPage(new Page.Search.BookSearchPage("4822284611"));

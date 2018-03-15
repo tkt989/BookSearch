@@ -8,7 +8,10 @@
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Image Source="{local:ImageResource BookSearch.Resources.map.png}" HeightRequest="24" />
-                    <Label Text="{Binding Address}" TextColor="#0044cc" VerticalOptions="Center" />
+                    <Label Text="{Binding Address}" TextColor="#0044cc" VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="AddressTapped" />
+                        </Label.GestureRecognizers>                    </Label>
                 </StackLayout>
                 <BoxView HorizontalOptions="Fill" HeightRequest="1" Color="#bfbfbf" />
                 <StackLayout Orientation="Horizontal">

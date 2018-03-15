@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Xamarin.Forms;
+using Plugin.Geolocator;
 using BookSearch.Service;
 using System.Runtime.CompilerServices;
 using BookSearch.Model;
@@ -38,7 +40,8 @@ namespace BookSearch.Page.Search
             {
                 Device.BeginInvokeOnMainThread(async () =>
                 {
-                    await bookRepository.SearchInLocation(isbn, 129.8590067, 32.7906449, list =>
+                    var location = await CrossGeolocator.Current.GetPositionAsync();
+                    await bookRepository.SearchInLocation(isbn, location.Longitude, location.Latitude, list =>
                     {
                         this.list.Nearby = list;
                     });
@@ -64,13 +67,18 @@ namespace BookSearch.Page.Search
                 {
                     if (info == null)
                     {
-                        BookTitle.Text = "本の情報が見つかりませんでした。";
+                        Title.Text = "本の情報が見つかりませんでした。";
                         Thumbnail.Source = null;
                         return;
                     }
 
-                    BookTitle.Text = info.Title;
+                    Title.Text = info.Title;
                     Thumbnail.Source = new UriImageSource() { Uri = new Uri(info.Thumbnail) };
+
+                    if (!BookInfo.GetAll().ToList().Contains(info))
+                    {
+                        info.Write();
+                    }
                 });
             });
         }

@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using System.Linq;
+using Realms;
 using BookSearch.Service;
 
 namespace BookSearch.Page
@@ -25,6 +26,22 @@ namespace BookSearch.Page
 
             ToolbarItems.Add(favorite);
 
+            var resultHistroy = Model.BookInfo.GetAll();
+            resultHistroy.SubscribeForNotifications((sender, changes, error) =>
+            {
+                listView.ItemsSource = resultHistroy.ToList();
+                
+                if (resultHistroy.Count() == 0)
+                {
+                    listView.IsVisible = false;
+                    message.IsVisible = true;
+                    return;
+                }
+
+                listView.IsVisible = true;
+                message.IsVisible = false;
+            });
+
             scanButton.Clicked += async (sender, e) => {
                 Navigation.PushAsync(new Search.BookSearchPage("4121024109"));
                 //var scanner = new ZXing.Mobile.MobileBarcodeScanner();
@@ -35,6 +52,14 @@ namespace BookSearch.Page
                 //    await Navigation.PushAsync(new Search.BookSearchPage(result.Text));
                 //}
             };
+        }
+
+        private void BookTapped(object sender, ItemTappedEventArgs e)
+        {
+            if (e.Item is Model.BookInfo info)
+            {
+                Navigation.PushAsync(new Search.BookSearchPage(info.ISBN));
+            }
         }
     }
 }

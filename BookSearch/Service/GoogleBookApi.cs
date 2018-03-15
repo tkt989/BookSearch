@@ -26,9 +26,12 @@ namespace BookSearch.Service
 
             var obj = json["items"][0]["volumeInfo"];
 
-            var info = new BookInfo();
-            info.Title = obj["title"].Value<string>();
-            info.Thumbnail = obj["imageLinks"]["thumbnail"].Value<string>();
+            var info = new BookInfo()
+            {
+                Title = obj["title"].Value<string>(),
+                ISBN = isbn,
+                Thumbnail = obj["imageLinks"]["thumbnail"].Value<string>(),
+            };
 
             return info;
         }
