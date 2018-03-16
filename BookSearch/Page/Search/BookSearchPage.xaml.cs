@@ -67,13 +67,15 @@ namespace BookSearch.Page.Search
                 {
                     if (info == null)
                     {
-                        Title.Text = "本の情報が見つかりませんでした。";
-                        Thumbnail.Source = null;
+                        Info.BindingContext = new
+                        {
+                            Text = "本情報が見つかりませんでした。",
+                            Thumbnail = "",
+                        };
                         return;
                     }
 
-                    Title.Text = info.Title;
-                    Thumbnail.Source = new UriImageSource() { Uri = new Uri(info.Thumbnail) };
+                    Info.BindingContext = info;
 
                     if (!BookInfo.GetAll().ToList().Contains(info))
                     {

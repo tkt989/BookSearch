@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
 namespace BookSearch.Model
@@ -26,23 +24,12 @@ namespace BookSearch.Model
         public string Address { get; set; } = "";
         public string URL { get; set; } = "";
         public string Geocode { get; set; }
+        public string Status { get; set; } = "";
 
-        public BookStatus BookStatus;
         public Dictionary<string, string> LendingList = new Dictionary<string, string>();
 
         public static SearchResult FromEntity(LibraryEntity entity, SearchResponse response)
         {
-            var available = response.LibKeyMap.Any(pair => pair.Key == entity.LibKey);
-
-            var status = BookStatus.NOT_AVAILABLE;
-            if (available)
-            {
-                status = BookStatus.AVAILABLE;
-            }
-
-            if (response.Status == "Running") status = BookStatus.LOADING;
-            if (response.Status == "Error") status = BookStatus.ERROR;
-
             return new SearchResult()
             {
                 LibId = entity.LibId,
@@ -51,10 +38,10 @@ namespace BookSearch.Model
                 SystemName = entity.SystemName,
                 ReserveURL = response.ReserveUrl,
                 Name = entity.Name,
-                BookStatus = status,
                 Address = entity.Address,
                 URL = entity.URL,
                 Geocode = entity.Geocode,
+                Status = response.Status,
             };
         }
 
@@ -67,10 +54,10 @@ namespace BookSearch.Model
                 SystemName = entity.SystemName,
                 ReserveURL = null,
                 Name = entity.Name,
-                BookStatus = BookStatus.LOADING,
                 Address = entity.Address,
                 URL = entity.URL,
                 Geocode = entity.Geocode,
+                Status = "Running",
             };
         }
 
@@ -81,22 +68,75 @@ namespace BookSearch.Model
             get => Name;
         }
 
-        public string Status
+        public string StatusText
         {
             get
             {
-                switch (BookStatus)
+                if (Status == "Error") return "エラー";
+                if (Status == "Running") return "取得中";
+
+                var isInResponse = LendingList.Any(pair => pair.Key == LibKey);
+
+                if (isInResponse)
                 {
-                    case BookStatus.AVAILABLE:
-                    case BookStatus.OTHER_LIBRARY:
-                        return "貸出可";
-                    case BookStatus.NOT_AVAILABLE:
-                        return "貸出不可";
-                    case BookStatus.LOADING:
-                        return "読み込み中";
-                    default:
-                        return "エラー";
+                    var status = LendingList.Where(pair => pair.Key == LibKey).First().Value;
+                    return status;
                 }
+
+                var existsList = new List<string>() { "貸出可", "蔵書あり", "館内のみ" };
+                var otherLib = LendingList.Where(pair => existsList.Contains(pair.Value));
+                if (otherLib.Count() != 0) return  $"{otherLib.First().Value}(別館)";
+
+                var failList = new List<string>() { "貸出中", "予約中" };
+                otherLib = LendingList.Where(pair => failList.Contains(pair.Value));
+                if (otherLib.Count() != 0) return $"{otherLib.First().Value}(別館)";
+
+                return "蔵書なし";
+            }
+        }
+
+        public Color StatusColor
+        {
+            get
+            {
+                if (Status == "Error") return Color.FromHex("#b50000");
+                if (Status == "Running") return Color.FromHex("#909090");
+
+                var isInResponse = LendingList.Any(pair => pair.Key == LibKey);
+
+                if (isInResponse)
+                {
+                    var status = LendingList.Where(pair => pair.Key == LibKey).First().Value;
+                    return GetStatusColor(status);
+                }
+
+                var existsList = new List<string>() { "貸出可", "蔵書あり", "館内のみ" };
+                var otherLib = LendingList.Where(pair => existsList.Contains(pair.Value));
+                if (otherLib.Count() != 0) return Color.FromHex("#08b500");
+
+                var failList = new List<string>() { "貸出中", "予約中" };
+                otherLib = LendingList.Where(pair => failList.Contains(pair.Value));
+                if (otherLib.Count() != 0) return Color.FromHex("#b50000");
+
+                return Color.FromHex("#909090");
+            }
+        }
+        Color GetStatusColor(string status)
+        {
+            switch (status)
+            {
+                case "貸出可":
+                case "蔵書あり":
+                case "館内のみ":
+                    return Color.FromHex("#08b500");
+                case "貸出中":
+                case "予約中":
+                    return Color.FromHex("#b50000");
+                case "準備中":
+                case "休館中":
+                case "蔵書なし":
+                default:
+                    return Color.FromHex("#909090");
             }
         }
 

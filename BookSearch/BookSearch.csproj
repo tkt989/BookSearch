@@ -63,6 +63,10 @@
     <EmbeddedResource Include="Resources\star.png" />
     <EmbeddedResource Include="Resources\book.png" />
     <EmbeddedResource Include="Resources\earth.png" />
+    <EmbeddedResource Include="Control\BookInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -103,6 +107,9 @@
     <Compile Include="Model\GroupedSearchResultList.cs" />
     <Compile Include="Model\GroupedSearchResult.cs" />
     <Compile Include="ImageResourceExtension.cs" />
+    <Compile Include="Control\BookInfo.xaml.cs">
+      <DependentUpon>BookInfo.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
@@ -150,6 +157,9 @@
     <Reference Include="Plugin.Geolocator">
       <HintPath>..\packages\Xam.Plugin.Geolocator.4.2.0\lib\netstandard1.0\Plugin.Geolocator.dll</HintPath>
     </Reference>
+    <Reference Include="System.ValueTuple">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -162,6 +172,7 @@
     <Folder Include="Page\Search\" />
     <Folder Include="Service\" />
     <Folder Include="Resources\" />
+    <Folder Include="Control\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.5.0.121934\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.5.0.121934\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets')" />

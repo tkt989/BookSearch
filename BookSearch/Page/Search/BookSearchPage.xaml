@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:BookSearch.View" x:Class="BookSearch.Page.Search.BookSearchPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:BookSearch.Control" x:Class="BookSearch.Page.Search.BookSearchPage">
     <ContentPage.Content>
         <StackLayout Orientation="Vertical">
             <Frame Padding="0" CornerRadius="0">
-                <StackLayout Orientation="Horizontal" HeightRequest="88" HorizontalOptions="FillAndExpand">
-                    <Image x:Name="Thumbnail" HeightRequest="64" VerticalOptions="Center" Margin="16,0,16,0" />
-                    <Label x:Name="Title" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Grid.Row="0" />
-                </StackLayout>
+                <local:BookInfo x:Name="Info" />
             </Frame>
             <ListView x:Name="listView" ItemTapped="ItemTapped" IsGroupingEnabled="true" GroupDisplayBinding="{Binding Title}" HasUnevenRows="true" RowHeight="30">
                 <ListView.GroupHeaderTemplate>
@@ -14,7 +11,7 @@
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" Margin="16,0,0,0">
                                 <Image Source="{Binding Icon}" HeightRequest="20" VerticalOptions="CenterAndExpand" />
-                                <Label Text="{Binding Title}" VerticalOptions="CenterAndExpand" />
+                                <Label Text="{Binding Title}" VerticalOptions="CenterAndExpand" FontSize="16" FontAttributes="Bold" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
@@ -23,8 +20,8 @@
                     <DataTemplate>
                         <ViewCell Height="70">
                             <StackLayout Orientation="Vertical" Margin="16,16,16,16">
-                                <Label Text="{Binding LibraryName}" Style="{DynamicResource TitleStyle}" />
-                                <Label Text="{Binding Status}" TextColor="{Binding StatusColor}" HorizontalOptions="End" />
+                                <Label Text="{Binding LibraryName}" FontSize="16" />
+                                <Label Text="{Binding StatusText}" TextColor="{Binding StatusColor}" HorizontalOptions="End" FontAttributes="Bold" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
