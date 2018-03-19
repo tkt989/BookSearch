@@ -110,6 +110,10 @@
     <Compile Include="Control\BookInfo.xaml.cs">
       <DependentUpon>BookInfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Util\Dispatcher.cs" />
+    <Compile Include="Util\VisibilityConverter.cs" />
+    <Compile Include="Service\IBookInfoApi.cs" />
+    <Compile Include="Service\RakutenBookApi.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
@@ -173,6 +177,7 @@
     <Folder Include="Service\" />
     <Folder Include="Resources\" />
     <Folder Include="Control\" />
+    <Folder Include="Util\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.5.0.121934\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.5.0.121934\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets')" />

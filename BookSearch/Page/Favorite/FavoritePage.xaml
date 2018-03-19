@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="BookSearch.Page.FavoritePage">
+    <ContentPage.Title>お気に入り</ContentPage.Title>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="追加" Clicked="AddClicked"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Orientation="Vertical">
             <ListView x:Name="listView"></ListView>
-            <Label x:Name="message" Text="お気に入りの図書館が登録されていません" IsVisible="false" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" TextColor="#bfbfbf"/>
+            <Label x:Name="message" FontSize="16" Text="お気に入りの図書館が登録されていません" IsVisible="false" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" TextColor="#bfbfbf"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

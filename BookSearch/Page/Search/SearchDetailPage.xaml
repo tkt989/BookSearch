@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:BookSearch;assembly=BookSearch" x:Class="BookSearch.Page.Search.SearchDetailPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:BookSearch;assembly=BookSearch" xmlns:cv="clr-namespace:BookSearch.Util;assembly=BookSearch" x:Class="BookSearch.Page.Search.SearchDetailPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <cv:VisibilityConverter x:Key="VisibilityConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Orientation="Vertical" Margin="16,16,16,16" Spacing="8">
@@ -35,10 +41,10 @@
                         </Grid>
                     </StackLayout>
                 </StackLayout>
-                <BoxView HorizontalOptions="Fill" HeightRequest="1" Color="#bfbfbf" />
-                <StackLayout Orientation="Horizontal">
+                <BoxView HorizontalOptions="Fill" HeightRequest="1" Color="#bfbfbf"/>
+                <StackLayout Orientation="Horizontal" IsVisible="{Binding Path=ReserveURL,Converter={StaticResource VisibilityConverter},ConverterParameter=true}">
                     <Image Source="{local:ImageResource BookSearch.Resources.map.png}" HeightRequest="24" />
-                    <Label Text="予約ページへ" TextColor="#0044cc" VerticalOptions="Center">
+                    <Label x:Name="reserve" Text="予約ページへ" TextColor="#0044cc" VerticalOptions="Center">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="ReserveURLTapped" />
                         </Label.GestureRecognizers>

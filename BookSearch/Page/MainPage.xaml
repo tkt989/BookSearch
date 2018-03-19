@@ -15,7 +15,7 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <Label x:Name="message" IsVisible="false" Text="ここに検索した本の履歴が表示されます" TextColor="#bfbfbf" VerticalTextAlignment="Center" VerticalOptions="FillAndExpand" HorizontalOptions="Center" />
+                <Label x:Name="message" FontSize="16" IsVisible="false" Text="ここに検索した本の履歴が表示されます" TextColor="#bfbfbf" VerticalTextAlignment="Center" VerticalOptions="FillAndExpand" HorizontalOptions="Center" />
             </StackLayout>
             <Button x:Name="scanButton" Text="Scan" Margin="10" />
         </StackLayout>

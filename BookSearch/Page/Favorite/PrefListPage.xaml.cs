@@ -65,13 +65,16 @@ namespace BookSearch.Page
         {
             InitializeComponent();
 
-            Title = "図書館選択";
-
             listView.ItemsSource = prefList;
             listView.ItemTapped += (sender, e) =>
             {
                 Navigation.PushAsync(new CityListPage((string)e.Item));
             };
+        }
+
+        public void CloseClicked(object sender, System.EventArgs eventArgs)
+        {
+            Navigation.PopModalAsync(true);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace BookSearch.Model
         public string LibId = "";
         public string LibKey = "";
         public string SystemName = "";
-        public string ReserveURL = "";
+        public string ReserveURL { get; set; } = "";
         public string Name = "";
         public string Address { get; set; } = "";
         public string URL { get; set; } = "";

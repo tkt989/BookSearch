@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="BookSearch.Control.BookInfo">
     <ContentView.Content>
-        <StackLayout Orientation="Horizontal" HeightRequest="88" HorizontalOptions="FillAndExpand">
-            <Image Source="{Binding Thumbnail}" x:Name="Thumbnail" HeightRequest="64" VerticalOptions="Center" Margin="16,0,16,0" />
-            <Label Text="{Binding Title}" x:Name="Title" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Grid.Row="0" />
+        <StackLayout Orientation="Horizontal" HeightRequest="72" MinimumHeightRequest="72">
+            <Image Source="{Binding Thumbnail}" x:Name="Thumbnail" IsVisible="false" HeightRequest="64" WidthRequest="64" VerticalOptions="Center" Margin="16,0,0,0" />
+            <BoxView x:Name="ThumbnailPlaceholder" HeightRequest="64" VerticalOptions="Center" WidthRequest="64" Margin="16,0,0,0" BackgroundColor="#dddddd" />
+            <Label Text="{Binding Title}" x:Name="Title" IsVisible="false" FontSize="16" Margin="8,0,8,0" VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+            <BoxView x:Name="TitlePlaceholder" HeightRequest="16" HorizontalOptions="FillAndExpand" Margin="8,0,8,0" VerticalOptions="Center" BackgroundColor="#dddddd"/>
         </StackLayout>
     </ContentView.Content>
 </ContentView>

@@ -8,7 +8,7 @@ using BookSearch.Model;
 
 namespace BookSearch.Service
 {
-    public class GoogleBookApi
+    public class GoogleBookApi : IBookInfoApi
     {
         private const string infoUrl = "https://www.googleapis.com/books/v1/volumes?q=isbn:{0}";
 

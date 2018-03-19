@@ -11,8 +11,6 @@ namespace BookSearch.Page
         {
             InitializeComponent();
 
-            SetupToolbar();
-
             var favorites = Model.LibraryEntity.GetAll();
                 
             favorites.SubscribeForNotifications((sender, changes, error) =>
@@ -40,12 +38,9 @@ namespace BookSearch.Page
             };
         }
 
-        void SetupToolbar()
+        public void AddClicked(object sender, System.EventArgs eventArgs)
         {
-            var add = new ToolbarItem();
-            add.Text = "追加";
-            add.Clicked += (sender, e) => Navigation.PushModalAsync(new NavigationPage(new PrefListPage()));
-            ToolbarItems.Add(add);;
+            Navigation.PushModalAsync(new NavigationPage(new PrefListPage()));
         }
     }
 }

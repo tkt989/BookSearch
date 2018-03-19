@@ -17,7 +17,7 @@ namespace BookSearch.Page
             UpdateLibraries(pref, city);
         }
 
-        async Task UpdateLibraries(string pref, string city)
+        async void UpdateLibraries(string pref, string city)
         {
             var calilApi = new CalilApi();
             var libraries = await calilApi.GetLibraryAsync(pref, city);

@@ -3,9 +3,9 @@
     <ContentPage.Content>
         <StackLayout Orientation="Vertical">
             <Frame Padding="0" CornerRadius="0">
-                <local:BookInfo x:Name="Info" />
+                <local:BookInfo x:Name="Info" IsLoading="true" />
             </Frame>
-            <ListView x:Name="listView" ItemTapped="ItemTapped" IsGroupingEnabled="true" GroupDisplayBinding="{Binding Title}" HasUnevenRows="true" RowHeight="30">
+            <ListView x:Name="listView" ItemTapped="ItemTapped" IsGroupingEnabled="true" GroupDisplayBinding="{Binding Title}" HasUnevenRows="true" RowHeight="32">
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -21,7 +21,7 @@
                         <ViewCell Height="70">
                             <StackLayout Orientation="Vertical" Margin="16,16,16,16">
                                 <Label Text="{Binding LibraryName}" FontSize="16" />
-                                <Label Text="{Binding StatusText}" TextColor="{Binding StatusColor}" HorizontalOptions="End" FontAttributes="Bold" />
+                                <Label Text="{Binding StatusText}" FontSize="16" TextColor="{Binding StatusColor}" HorizontalOptions="End" FontAttributes="Bold" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

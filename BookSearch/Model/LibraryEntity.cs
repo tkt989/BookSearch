@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Realms;
 using Newtonsoft.Json;
+using Xamarin.Forms;
+using BookSearch.Util;
 
 namespace BookSearch.Model
 {
@@ -68,5 +70,19 @@ namespace BookSearch.Model
                 realm.Remove(this);
             });
         }
-    }
+
+		public override bool Equals(object obj)
+		{
+            if (obj is LibraryEntity entity)
+            {
+                return this.LibId == entity.LibId;
+            }
+            return false;
+		}
+
+		public override int GetHashCode()
+		{
+            return base.GetHashCode();
+		}
+	}
 }

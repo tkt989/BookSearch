@@ -23,6 +23,7 @@ namespace BookSearch.Page
                 Navigation.PushAsync(new FavoritePage());
                 //Navigation.PushAsync(new FavoriteLibraryPage());
             };
+            favorite.Priority = -1;
 
             ToolbarItems.Add(favorite);
 
@@ -43,7 +44,7 @@ namespace BookSearch.Page
             });
 
             scanButton.Clicked += async (sender, e) => {
-                Navigation.PushAsync(new Search.BookSearchPage("4121024109"));
+                Navigation.PushAsync(new Search.BookSearchPage("4121024102"));
                 //var scanner = new ZXing.Mobile.MobileBarcodeScanner();
                 //var options = new ZXing.Mobile.MobileBarcodeScanningOptions();
                 //var result = await scanner.Scan(options);

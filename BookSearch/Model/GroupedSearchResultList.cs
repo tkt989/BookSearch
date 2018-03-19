@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
@@ -12,12 +13,13 @@ namespace BookSearch.Model
         {
             set
             {
-                favorites.Clear();
-                foreach (var v in value)
-                {
-                    favorites.Add(v);
-                }
+                favorites.ReplaceAll(value);
             }
+        }
+
+        void Update(ref SearchResult from, SearchResult to)
+        {
+            from = to;
         }
 
         GroupedSearchResult nearby;
@@ -25,11 +27,7 @@ namespace BookSearch.Model
         {
             set
             {
-                nearby.Clear();
-                foreach (var v in value)
-                {
-                    nearby.Add(v);
-                }
+                nearby.ReplaceAll(value);
             }
         }
         
