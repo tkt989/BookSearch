@@ -5,17 +5,17 @@ using Xamarin.Forms;
 
 namespace BookSearch.Model
 {
-    public enum BookStatus
-    {
-        AVAILABLE,
-        OTHER_LIBRARY,
-        LOADING,
-        NOT_AVAILABLE,
-        ERROR,
-    }
-
     public class SearchResult : ViewModelBase
     {
+        static readonly List<string> AVAILABLE = new List<string>
+        {
+            "貸出可", "蔵書あり", "館内のみ"
+        };
+        static readonly List<string> NOT_AVAILABLE = new List<string>
+        {
+            "貸出中", "予約中"
+        };
+        
         public string LibId = "";
         public string LibKey = "";
         public string SystemName = "";
@@ -61,8 +61,6 @@ namespace BookSearch.Model
             };
         }
 
-        #region ViewMode
-
         public string LibraryName
         {
             get => Name;
@@ -75,23 +73,16 @@ namespace BookSearch.Model
                 if (Status == "Error") return "エラー";
                 if (Status == "Running") return "取得中";
 
-                var isInResponse = LendingList.Any(pair => pair.Key == LibKey);
+                var status = GetDisplayStatus();
 
-                if (isInResponse)
+                if (!status.HasValue) return "蔵書なし";
+
+                if (status.Value.Key == LibKey)
                 {
-                    var status = LendingList.Where(pair => pair.Key == LibKey).First().Value;
-                    return status;
+                    return status.Value.Value;
                 }
 
-                var existsList = new List<string>() { "貸出可", "蔵書あり", "館内のみ" };
-                var otherLib = LendingList.Where(pair => existsList.Contains(pair.Value));
-                if (otherLib.Count() != 0) return  $"{otherLib.First().Value}(別館)";
-
-                var failList = new List<string>() { "貸出中", "予約中" };
-                otherLib = LendingList.Where(pair => failList.Contains(pair.Value));
-                if (otherLib.Count() != 0) return $"{otherLib.First().Value}(別館)";
-
-                return "蔵書なし";
+                return $"{status.Value.Value}(別館)";
             }
         }
 
@@ -99,47 +90,58 @@ namespace BookSearch.Model
         {
             get
             {
-                if (Status == "Error") return Color.FromHex("#b50000");
-                if (Status == "Running") return Color.FromHex("#909090");
+                var statusText = StatusText;
 
-                var isInResponse = LendingList.Any(pair => pair.Key == LibKey);
-
-                if (isInResponse)
+                if (AVAILABLE.Any(text => statusText.Contains(text)))
                 {
-                    var status = LendingList.Where(pair => pair.Key == LibKey).First().Value;
-                    return GetStatusColor(status);
+                    return Color.FromHex("#08b500");
                 }
 
-                var existsList = new List<string>() { "貸出可", "蔵書あり", "館内のみ" };
-                var otherLib = LendingList.Where(pair => existsList.Contains(pair.Value));
-                if (otherLib.Count() != 0) return Color.FromHex("#08b500");
-
-                var failList = new List<string>() { "貸出中", "予約中" };
-                otherLib = LendingList.Where(pair => failList.Contains(pair.Value));
-                if (otherLib.Count() != 0) return Color.FromHex("#b50000");
+                if (NOT_AVAILABLE.Any(text => statusText.Contains(text)))
+                {
+                    return Color.FromHex("#b50000");
+                }
 
                 return Color.FromHex("#909090");
             }
         }
-        Color GetStatusColor(string status)
+
+        KeyValuePair<string, string>? GetDisplayStatus()
+        {
+            KeyValuePair<string, string> status = LendingList.Where(s => s.Key == LibKey).FirstOrDefault();
+            var internalStatus = status.Key == null ? -1 : GetStatusInternalNumber(status.Value);
+
+            foreach (var pair in LendingList)
+            {
+                if (status.Key == null || internalStatus < GetStatusInternalNumber(pair.Value))
+                {
+                    status = pair;
+                    internalStatus = GetStatusInternalNumber(pair.Value);
+                }
+            }
+
+            if (status.Key == null) return null;
+
+            return status;
+        }
+
+        int GetStatusInternalNumber(string status)
         {
             switch (status)
             {
                 case "貸出可":
                 case "蔵書あり":
                 case "館内のみ":
-                    return Color.FromHex("#08b500");
+                    return 20;
                 case "貸出中":
                 case "予約中":
-                    return Color.FromHex("#b50000");
+                    return 10;
                 case "準備中":
                 case "休館中":
                 case "蔵書なし":
                 default:
-                    return Color.FromHex("#909090");
+                    return 0;
             }
         }
-
-        #endregion
     }
 }

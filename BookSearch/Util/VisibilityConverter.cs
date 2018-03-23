@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using Xamarin.Forms;
 namespace BookSearch.Util

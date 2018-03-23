@@ -44,14 +44,14 @@ namespace BookSearch.Page
             });
 
             scanButton.Clicked += async (sender, e) => {
-                Navigation.PushAsync(new Search.BookSearchPage("4121024102"));
-                //var scanner = new ZXing.Mobile.MobileBarcodeScanner();
-                //var options = new ZXing.Mobile.MobileBarcodeScanningOptions();
-                //var result = await scanner.Scan(options);
+                //Navigation.PushAsync(new Search.BookSearchPage("4121024109"));
+                var scanner = new ZXing.Mobile.MobileBarcodeScanner();
+                var options = new ZXing.Mobile.MobileBarcodeScanningOptions();
+                var result = await scanner.Scan(options);
 
-                //if (result != null) {
-                //    await Navigation.PushAsync(new Search.BookSearchPage(result.Text));
-                //}
+                if (result != null) {
+                    await Navigation.PushAsync(new Search.BookSearchPage(result.Text));
+                }
             };
         }
 

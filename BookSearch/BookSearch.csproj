@@ -114,6 +114,7 @@
     <Compile Include="Util\VisibilityConverter.cs" />
     <Compile Include="Service\IBookInfoApi.cs" />
     <Compile Include="Service\RakutenBookApi.cs" />
+    <Compile Include="Util\ISBNStringExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

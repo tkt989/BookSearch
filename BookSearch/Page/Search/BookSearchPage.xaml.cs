@@ -7,6 +7,7 @@ using System.ComponentModel;
 using Xamarin.Forms;
 using Plugin.Geolocator;
 using BookSearch.Service;
+using BookSearch.Util;
 using System.Runtime.CompilerServices;
 using BookSearch.Model;
 
@@ -26,6 +27,17 @@ namespace BookSearch.Page.Search
         public BookSearchPage(string isbn) : this()
         {
             bookRepository = new BookRepository();
+
+            if (!isbn.IsISBN())
+            {
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    await DisplayAlert("エラー", "書籍のバーコードではありません", "了解");
+                    await Navigation.PopAsync(true);
+                });
+                return;
+            }
+
             this.isbn = isbn;
 
             listView.HasUnevenRows = true;

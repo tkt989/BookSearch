@@ -2,10 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:BookSearch;assembly=BookSearch" xmlns:cv="clr-namespace:BookSearch.Util;assembly=BookSearch" x:Class="BookSearch.Page.Search.SearchDetailPage">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <cv:VisibilityConverter x:Key="VisibilityConverter"/>
+            <cv:VisibilityConverter x:Key="VisibilityConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
-
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Orientation="Vertical" Margin="16,16,16,16" Spacing="8">
@@ -17,7 +16,8 @@
                     <Label Text="{Binding Address}" TextColor="#0044cc" VerticalOptions="Center">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="AddressTapped" />
-                        </Label.GestureRecognizers>                    </Label>
+                        </Label.GestureRecognizers>
+                    </Label>
                 </StackLayout>
                 <BoxView HorizontalOptions="Fill" HeightRequest="1" Color="#bfbfbf" />
                 <StackLayout Orientation="Horizontal">
@@ -41,14 +41,16 @@
                         </Grid>
                     </StackLayout>
                 </StackLayout>
-                <BoxView HorizontalOptions="Fill" HeightRequest="1" Color="#bfbfbf"/>
-                <StackLayout Orientation="Horizontal" IsVisible="{Binding Path=ReserveURL,Converter={StaticResource VisibilityConverter},ConverterParameter=true}">
-                    <Image Source="{local:ImageResource BookSearch.Resources.map.png}" HeightRequest="24" />
-                    <Label x:Name="reserve" Text="予約ページへ" TextColor="#0044cc" VerticalOptions="Center">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="ReserveURLTapped" />
-                        </Label.GestureRecognizers>
-                    </Label>
+                <StackLayout Orientation="Vertical" IsVisible="{Binding ReserveURL, Converter={StaticResource VisibilityConverter}}">
+                    <BoxView HorizontalOptions="Fill" HeightRequest="1" Color="#bfbfbf" />
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="{local:ImageResource BookSearch.Resources.map.png}" HeightRequest="24" />
+                        <Label x:Name="reserve" Text="予約ページへ" TextColor="#0044cc" VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="ReserveURLTapped" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
                 </StackLayout>
             </StackLayout>
         </ScrollView>
