@@ -26,7 +26,7 @@ namespace BookSearch.Model
         public string Geocode { get; set; }
         public string Status { get; set; } = "";
 
-        public Dictionary<string, string> LendingList = new Dictionary<string, string>();
+        public Dictionary<string, string> LendingList { get; set; } = new Dictionary<string, string>();
 
         public static SearchResult FromEntity(LibraryEntity entity, SearchResponse response)
         {

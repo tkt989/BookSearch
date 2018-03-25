@@ -8,6 +8,10 @@ namespace BookSearch.Util
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (value is Dictionary<string, string> dict)
+            {
+                return !(dict.Count == 0);
+            }
             return !((bool)string.IsNullOrEmpty(value as string));
         }
 

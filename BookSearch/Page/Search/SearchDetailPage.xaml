@@ -28,8 +28,9 @@
                         </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>
+                <StackLayout Orientation="Vertical" IsVisible="{Binding LendingList, Converter={StaticResource VisibilityConverter}}">
                 <BoxView HorizontalOptions="Fill" HeightRequest="1" Color="#bfbfbf" />
-                <StackLayout Orientation="Horizontal">
+                <StackLayout HorizontalOptions="Fill" Orientation="Horizontal">
                     <Image Source="{local:ImageResource BookSearch.Resources.list.png}" VerticalOptions="Start" HeightRequest="24" />
                     <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Margin="0,3,0,0">
                         <Label Text="蔵書" FontSize="16" FontAttributes="Bold" />
@@ -40,6 +41,7 @@
                             </Grid.ColumnDefinitions>
                         </Grid>
                     </StackLayout>
+                </StackLayout>
                 </StackLayout>
                 <StackLayout Orientation="Vertical" IsVisible="{Binding ReserveURL, Converter={StaticResource VisibilityConverter}}">
                     <BoxView HorizontalOptions="Fill" HeightRequest="1" Color="#bfbfbf" />
