@@ -43,8 +43,8 @@
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>test</string>
+	<string>近くの図書館を探すために使用します。</string>
 	<key>NSCameraUsageDescription</key>
-	<string>test</string>
+	<string>本のバーコードをスキャンするために使用します。</string>
 </dict>
 </plist>

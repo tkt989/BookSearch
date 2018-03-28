@@ -5,6 +5,8 @@ using Xamarin.Forms;
 using System.Linq;
 using Realms;
 using BookSearch.Service;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 
 namespace BookSearch.Page
 {
@@ -56,12 +58,25 @@ namespace BookSearch.Page
         {
             //Navigation.PushAsync(new Search.BookSearchPage("4121024109"));
             var scanner = new ZXing.Mobile.MobileBarcodeScanner();
+            scanner.CancelButtonText = "キャンセル";
+            scanner.FlashButtonText = "フラッシュ";
+            scanner.AutoFocus();
             var options = new ZXing.Mobile.MobileBarcodeScanningOptions();
-            var result = await scanner.Scan(options);
 
-            if (result != null)
+            var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Plugin.Permissions.Abstractions.Permission.Camera);
+
+            if (status == Plugin.Permissions.Abstractions.PermissionStatus.Granted)
             {
-                await Navigation.PushAsync(new Search.BookSearchPage(result.Text));
+                var result = await scanner.Scan(options);
+
+                if (result != null)
+                {
+                    await Navigation.PushAsync(new Search.BookSearchPage(result.Text));
+                }
+            }
+            else 
+            {
+                await DisplayAlert("エラー", "カメラを使用できません", "了解");
             }
         }
     }
